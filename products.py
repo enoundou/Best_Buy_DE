@@ -1,13 +1,17 @@
 class Product:
+    """
+    Product class
+    """
+
     def __init__(self, name, price, quantity):
         try:
             if name is None:
-                raise Exception('Invalid Product Name')
+                raise ValueError('Invalid Product Name')
             if price < 0.0:
-                raise Exception('Invalid Product Price')
+                raise ValueError('Invalid Product Price')
             if quantity < 0:
-                raise Exception('Invalid Product Quantity')
-        except Exception as e:
+                raise ValueError('Invalid Product Quantity')
+        except ValueError as e:
             print(e)
 
         self.name = name
@@ -48,7 +52,7 @@ class Product:
 
     def show(self):
         """
-        shows the product
+        shows the item
         :return: product show
         """
         return f"{self.name}, Price: {self.price}, Quantity: {self.quantity}"
@@ -72,22 +76,3 @@ class Product:
         self.active = self.quantity > 0
 
         return quantity * self.price
-
-
-def main():
-    bose = Product("Bose QuietComfort Earbuds", price=250, quantity=500)
-    mac = Product("MacBook Air M2", price=1450, quantity=100)
-
-    print(bose.buy(50))
-    print(mac.buy(100))
-    print(mac.is_active())
-
-    bose.show()
-    mac.show()
-
-    bose.set_quantity(1000)
-    bose.show()
-
-
-if __name__ == "__main__":
-    main()
