@@ -7,39 +7,57 @@ class Store:
         self.products = product_list
 
     def add_product(self, product):
+        """
+        Add a product to the store
+        :param product: product to add
+        """
         if not isinstance(product, products.Product):
             raise TypeError("Product must be of type Product")
         self.products.append(product)
 
-
     def remove_product(self, product):
+        """
+        Remove a product from the store
+        :param product: product to remove
+        """
         if not isinstance(product, products.Product):
             raise TypeError("Product must be of type Product")
         self.products.remove(product)
 
-
     def get_total_quantity(self):
+        """
+        Get the total quantity of the store
+        :return: the total quantity of the store
+        """
         return sum(product.get_quantity() for product in self.products)
 
-
     def get_all_products(self):
-        active_products = []
+        """
+        Get all products
+        :return: all active products
+        """
+        active_products = {}
+        i = 1
         for product in self.products:
             if product.is_active():
-                active_products.append(product)
+                active_products[i] = product
+                i += 1
         return active_products
 
-
-    def order(self, shopping_list):
-        total =0
+    @staticmethod
+    def order(shopping_list):
+        """
+        Order a shopping list
+        :param shopping_list: list of products to order
+        :return: total value of products ordered
+        """
+        total_amount = 0
         for product, quantity in shopping_list:
-            total += product.buy(quantity)
-        return total
-
+            total_amount += product.buy(quantity)
+        return total_amount
 
 
 def main():
-
     bose = products.Product("Bose QuietComfort Earbuds", price=250, quantity=500)
     mac = products.Product("MacBook Air M2", price=1450, quantity=100)
 
@@ -69,7 +87,7 @@ def main():
     best_buy = Store(product_list)
     active_products = best_buy.get_all_products()
     print(best_buy.get_total_quantity())
-    print(best_buy.order([(active_products[0], 1), (active_products[1], 2)]))
+    print(best_buy.order([(active_products[1], 1), (active_products[2], 2)]))
 
 
 if __name__ == "__main__":
