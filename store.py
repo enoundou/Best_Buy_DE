@@ -7,7 +7,12 @@ class Store:
     """
 
     def __init__(self, product_list):
-        self.products = product_list
+        self.products = []
+        for product in product_list:
+            if product.active:
+                self.add_product(product)
+            else:
+                print(f"Product '{product.name}' not added to store")
 
     def add_product(self, product):
         """
@@ -16,7 +21,8 @@ class Store:
         """
         if not isinstance(product, products.Product):
             raise TypeError("Product must be of type Product")
-        self.products.append(product)
+        else:
+            self.products.append(product)
 
     def remove_product(self, product):
         """

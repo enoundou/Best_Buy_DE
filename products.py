@@ -4,20 +4,23 @@ class Product:
     """
 
     def __init__(self, name, price, quantity):
+
+        self.name = name
         try:
             if name is None:
                 raise ValueError('Invalid Product Name')
             if price < 0.0:
                 raise ValueError('Invalid Product Price')
-            if quantity < 0:
+            if quantity < 0 :
                 raise ValueError('Invalid Product Quantity')
-        except ValueError as e:
+            if type(quantity) is not int:
+                raise TypeError('Invalid Type of Product Quantity')
+            self.price = price
+            self.quantity = quantity
+            self.active = self.quantity > 0
+        except Exception as e:
             print(e)
-
-        self.name = name
-        self.price = price
-        self.quantity = quantity
-        self.active = quantity > 0
+            self.active = False
 
     def get_quantity(self):
         """

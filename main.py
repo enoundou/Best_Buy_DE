@@ -135,7 +135,7 @@ FUNCTIONS = {1: (command_list_all_products_in_store, "List all products in store
              }
 
 # setup initial stock of inventory
-product_list = [products.Product("MacBook Air M2", price=1450, quantity=100),
+product_list = [products.Product("MacBook Air M2", price=1450, quantity=100.1),
                 products.Product("Bose QuietComfort Earbuds", price=250, quantity=500),
                 products.Product("Google Pixel 7", price=500, quantity=250)
                 ]
